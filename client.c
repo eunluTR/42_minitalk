@@ -6,7 +6,7 @@
 /*   By: eunlu <eunlu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 20:18:06 by eunlu             #+#    #+#             */
-/*   Updated: 2025/02/21 20:21:23 by eunlu            ###   ########.fr       */
+/*   Updated: 2025/02/21 20:33:21 by eunlu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	pid = pid_to_int(argv[1]);
+	if (pid < 0)
+	{
+		write(1, "Error: PID is incorrect.\n", 26);
+		return (1);
+	}
 	while (argv[2][i])
 	{
 		ft_send_char(pid, argv[2][i]);
