@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eunlu <eunlu@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 20:18:18 by eunlu             #+#    #+#             */
+/*   Updated: 2025/02/21 20:22:29 by eunlu            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minitalk.h"
 
-static void	ft_print_pid(pid_t pid)
+static void	ft_print_pid(t_pid pid)
 {
 	char	ch;
 
@@ -18,9 +30,10 @@ static void	ft_print_pid(pid_t pid)
 
 static void	ft_get_char(int signal)
 {
-	static char	ch;
+	static char	ch = 0;
 	static int	i = 0;
 
+	ch = ch << 1;
 	if (signal == SIGUSR1)
 		ch |= 1;
 	i++;
@@ -30,12 +43,11 @@ static void	ft_get_char(int signal)
 		ch = 0;
 		i = 0;
 	}
-	ch = ch << i;
 }
 
-int main(void)
+int	main(void)
 {
-	pid_t	pid;
+	t_pid	pid;
 
 	pid = getpid();
 	ft_print_pid(pid);
@@ -46,4 +58,3 @@ int main(void)
 		pause();
 	return (0);
 }
-

@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eunlu <eunlu@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 20:18:06 by eunlu             #+#    #+#             */
+/*   Updated: 2025/02/21 20:21:23 by eunlu            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minitalk.h"
 
 static int	pid_to_int(const char *str)
 {
 	int	i;
 	int	sign;
-	int result;
+	int	result;
 
 	i = 0;
 	sign = 1;
@@ -29,22 +41,21 @@ static void	ft_send_char(int pid, char c)
 {
 	int	i;
 
-	i = 0;
-	while (i < 8)
+	i = 7;
+	while (i >= 0)
 	{
-		if (c & 1)
+		if ((c >> i) & 1)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
-		c = c >> 1;
-		i++;
-		usleep(100);
+		i--;
+		usleep(5000);
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	pid_t	pid;
+	t_pid	pid;
 	int		i;
 
 	i = 0;
